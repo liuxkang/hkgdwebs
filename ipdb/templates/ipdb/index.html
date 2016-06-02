@@ -11,19 +11,24 @@
 
   <body>
     <div class="container">
-      <nav class="navbar navbar-default" role="navigation">
-	<div class="navbar-header">
-	  <a class="navbar-brand" href="#">河口供电首页</a>
-	</div>
-	<div class="collapse navbar-collapse" id="example-navbar-collapse">
-	  <ul class="nav navbar-nav">
-	    <li class="active"><a href="#">iOS</a></li>
-	    <li><a href="#">IP地址管理</a></li>
-	    <li><a href="#">办公用品采购</a><li>
-	    </li>
-	  </ul>
-	</div>
-      </nav>
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">河口供电</a>
+			</div>
+			<div class="collapse navbar-collapse" id="example-navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">首页</a></li>
+					<li><a href="#">IP地址管理</a></li>
+					<li><a href="#">办公用品采购</a><li>
+					</li>
+				</ul>
+			</div>
+		</nav>
     </div>
+	<ul>
+	{% for item in datatmp %}
+		<li>item.ip_addr</li>
+	{% endfor %}
+	</ul>
   </body>
 </html>
