@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ipdb.apps.IpdbConfig',
+    'bootstrap3'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -67,7 +68,7 @@ TEMPLATES = [
             ],
         },
     },
-]
+    ]
 
 WSGI_APPLICATION = 'hkgdwebs.wsgi.application'
 
@@ -135,5 +136,5 @@ LOCALES=(
     ('zh-hans', u'简体中文'),
 )
 
-STATIC_URL = '/static/'
+#STATIC_URL = '/static/'
 
