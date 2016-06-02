@@ -134,3 +134,6 @@ LOCALES=(
     #Simplified Chinese
     ('zh-hans', u'简体中文'),
 )
+
+STATIC_URL = '/static/'
+
