@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ipdb.apps.IpdbConfig',
     'bootstrap3'
+    'mod_wsgi.server'
 ]
 
 MIDDLEWARE_CLASSES = [
