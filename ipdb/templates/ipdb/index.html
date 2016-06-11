@@ -7,6 +7,11 @@
     {% bootstrap_javascript %}
     {% bootstrap_messages %}
     <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://sandbox.runjs.cn/uploads/rs/238/n8vhm36h/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="http://sandbox.runjs.cn/uploads/rs/238/n8vhm36h/bootstrap-responsiv.css">
+	<link rel="stylesheet" type="text/css" href="http://sandbox.runjs.cn/uploads/rs/238/n8vhm36h/dataTables.bootstra.css">
+	{% load staticfiles %}
+	<script src="{% static 'ipdb/ipdb.js' %}" ></script>
   </head>
 
   <body>
@@ -24,11 +29,34 @@
 				</ul>
 			</div>
 		</nav>
+		<table class="table table-striped table-bordered table-hover datatable">
+			<caption>IP地址</caption>
+			<thead>
+				<tr>
+					<th>IP地址</th>
+					<th>MAC地址</th>
+					<th>Vlan</th>
+					<th>部门</th>
+					<th>备注</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+			{% for item in datatmp %}
+				<tr>
+					<th>{{item.mac_addr}}</th>
+					<th>{{item.ip_addr}}</th>
+					<th>{{item.vlan_id}}</th>
+					<th>{{item.dept}}</th>
+					<th>{{item.noted}}</th>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+		<p id="test">点我</p>
     </div>
-	<ul>
-	{% for item in datatmp %}
-		<li>item.ip_addr</li>
-	{% endfor %}
-	</ul>
+	
+
+
   </body>
 </html>

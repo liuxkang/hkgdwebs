@@ -125,6 +125,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+#STATICFILES_DIRS=(
+    #os.path.join(os.path.dirname(__file__),'../static/'.replace("\\",'/'),
+#)
 FILE_CHARSET='utf-8'
 DEFAULT_CHARSET='utf-8'
 
@@ -135,6 +138,4 @@ LOCALES=(
     #Simplified Chinese
     ('zh-hans', u'简体中文'),
 )
-
-#STATIC_URL = '/static/'
 
