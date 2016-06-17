@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '^+u4_*v_el)1yhql-&^00yn%flyp+=im7t$!&8xiu-*6+^29@r'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*',]
 
 
 # Application definition
@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ipdb.apps.IpdbConfig',
-    'bootstrap3'
-    'mod_wsgi.server'
+    'bootstrap3',
+    'mod_wsgi',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -126,9 +126,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
-#STATICFILES_DIRS=(
-    #os.path.join(os.path.dirname(__file__),'../static/'.replace("\\",'/'),
-#)
+STATIC_ROOT=os.path.join(BASE_DIR,'static')
 FILE_CHARSET='utf-8'
 DEFAULT_CHARSET='utf-8'
 
@@ -139,4 +137,4 @@ LOCALES=(
     #Simplified Chinese
     ('zh-hans', u'简体中文'),
 )
-
+TEMPLATE_DEBUG = False
