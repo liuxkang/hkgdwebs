@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ipdb.apps.IpdbConfig',
+    'web_nav',
     'bootstrap3',
     'mod_wsgi',
 ]

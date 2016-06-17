@@ -16,7 +16,9 @@ Including another URLconf
 from django.conf.urls import url,include
 from django.contrib import admin
 import ipdb.views
+import web_nav.views
 urlpatterns = [
-    url(r'^',include("ipdb.urls")),
+    url(r'^$',web_nav.views.web_nav,name="index"),
     url(r'^admin/',admin.site.urls),
+    url(r'^ipdb/',ipdb.views.ipdb,name="ipdb"),
 ]

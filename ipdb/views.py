@@ -3,10 +3,10 @@ from django.http import HttpResponse
 from .models import Ipdb
 from django.template import loader
 # Create your views here.
-def index(request):
+def ipdb(request):
     ipdata = Ipdb.objects.all()
-    index_template = loader.get_template("ipdb/index.html")
+    ipdb_template = loader.get_template("ipdb/ipdb.html")
     context = {
-        'ipdata ':ipdata,
+        'ipdata':ipdata,
     }
-    return HttpResponse(index_template.render(context,request))
+    return HttpResponse(ipdb_template.render(context,request))
