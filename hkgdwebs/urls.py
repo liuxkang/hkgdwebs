@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^$',web_nav.views.web_nav,name="index"),
     url(r'^admin/',admin.site.urls),
     url(r'^ipdb/',ipdb.views.ipdb,name="ipdb"),
+    url(r'^test/',web_nav.views.test,name="test"),
 ]

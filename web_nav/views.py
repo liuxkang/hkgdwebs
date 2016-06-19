@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,render_to_response
 from django.http import HttpResponse
 from .models import Web_nav
 from django.template import loader
@@ -11,3 +11,10 @@ def web_nav(request):
         'webdata':webdata,
     }
     return HttpResponse(template.render(context,request))
+
+def test(request):
+    testdata = Web_nav.objects.all()
+    context = {
+        'testdata':testdata,
+    }
+    return render_to_response("web_nav/test.html",locals())

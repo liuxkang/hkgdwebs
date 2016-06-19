@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>河口瑶族自治县供电有限责任公司——系统导航</title>
+    <title>河口瑶族自治县供电有限责任公司——test</title>
     {% load bootstrap3 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
@@ -24,7 +24,7 @@
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="{%url 'index' %}">网页导航</a></li>
 					<li><a href="{%url 'ipdb' %}">IP地址管理</a></li>
-					<li><a href="?name=liukang">办公用品采购</a><li>
+					<li><a href="#">办公用品采购</a><li>
 					</li>
 				</ul>
 			</div>
@@ -40,7 +40,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						{% for item in webdata %}
+						{% for item in testdata %}
 						<tr>
 							<th>{{ item.name }}</th>
 							<th><a href="{{ item.addr }}">{{ item.addr }}</a></th>
@@ -50,6 +50,6 @@
 				</table>
 			</div>
 		</div>	
-    </div>	
+    </div>
   </body>
 </html>

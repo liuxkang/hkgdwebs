@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'ipdb.apps.IpdbConfig',
     'web_nav',
     'bootstrap3',
-    'mod_wsgi',
+    #'mod_wsgi',
 ]
 
 MIDDLEWARE_CLASSES = [
