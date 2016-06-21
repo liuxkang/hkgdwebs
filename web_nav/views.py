@@ -6,11 +6,10 @@ from django.template import loader
 
 def web_nav(request):
     webdata = Web_nav.objects.all()
-    template = loader.get_template("web_nav/web_nav.html")
     context = {
         'webdata':webdata,
     }
-    return HttpResponse(template.render(context,request))
+    return render_to_response("web_nav/web_nav.html",locals())
 
 def test(request):
     testdata = Web_nav.objects.all()

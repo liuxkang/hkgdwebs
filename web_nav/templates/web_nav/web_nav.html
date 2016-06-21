@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+	<META HTTP-EQUIV="pragma" CONTENT="no-cache"> 
+	<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate"> 
+	<META HTTP-EQUIV="expires" CONTENT="0">
     <title>河口瑶族自治县供电有限责任公司——系统导航</title>
     {% load bootstrap3 %}
     {% bootstrap_css %}
@@ -40,12 +43,14 @@
 						</tr>
 					</thead>
 					<tbody>
+						{% if webdata %}
 						{% for item in webdata %}
 						<tr>
 							<th>{{ item.name }}</th>
 							<th><a href="{{ item.addr }}">{{ item.addr }}</a></th>
 						</tr>
 						{% endfor %}
+						{% endif %}
 					</tbody>
 				</table>
 			</div>

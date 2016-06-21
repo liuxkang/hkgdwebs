@@ -7,5 +7,5 @@ function initAll()
 
 function disappear()
 {
-	this.innerHTML = "";
+	this.innerHTML = "我消失，我消失！";
 }
