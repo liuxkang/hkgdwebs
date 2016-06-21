@@ -1,11 +1,11 @@
-window.onload = initAll
+window.onload = initAll;
 
 function initAll()
 {
-	document.getElementById("test").onclick = disappear;
+	document.getElementById("edit_button").onclick = to_value;
 }
 
-function disappear()
+function to_value()
 {
-	this.innerHTML = "";
+	window.location.href=document.URL+"?ip_value="+this.value;
 }
