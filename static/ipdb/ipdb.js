@@ -7,5 +7,5 @@ function initAll()
 
 function disappear()
 {
-	this.innerHTML = "妈的";
+	this.innerHTML = "";
 }
