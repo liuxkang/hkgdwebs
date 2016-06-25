@@ -17,7 +17,7 @@
 	<script src="{% static 'ipdb/ipdb.js' %}" ></script>
 	<link rel="stylesheet" type="text/css" href="{% static 'ipdb/ipdb.css' %}"> 
 	<div id="dept_names">
-		{% for item in deptdata %}
+		{% for item in depts_data %}
 		<p>{{ item.dept_name }}</p>
 		{% endfor %}
 	</div>
@@ -55,12 +55,14 @@
 				<tr>
 					<th>{{item.vlan_id}}</th>
 					<th>{{item.ip_addr}}</th>
-					<th class="col_mac">{{item.mac_addr}}</th>
-					<th class="col_dept">{{item.dept}}</th>
-					<th class="col_noted">{{item.noted}}</th>
+					<th class="mac_col">{{item.mac_addr}}</th>
+					<th class="dept_col">{{item.dept}}</th>
+					<th class="noted_col">{{item.noted}}</th>
 					<th>
-						<button id="edit" class="edit_button">修改</button>
-						<button id="edit" class="edit_button">清除</button>
+						<button id="edit_{{item.ip_addr}}" class="edit_button" name="{{item.ip_addr}}">修改</button>
+						<button id="delete_{{item.ip_addr}}" class="delete_button" name="{{item.ip_addr}}">清除</button>
+						<button id="ok_{{item.ip_addr}}" class="ok_button" name="{{item.ip_addr}}">确定</button>
+						<button id="no_{{item.ip_addr}}" class="no_button" name="{{item.ip_addr}}">取消</button>
 					</th>
 				</tr>
 			{% endfor %}

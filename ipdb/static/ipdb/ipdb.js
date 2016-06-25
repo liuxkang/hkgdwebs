@@ -2,73 +2,129 @@ window.onload = initAll;
 
 function initAll()
 {
-	var btns = document.getElementsByTagName("button");
-	for(var i =0;i<btns.length;i++)
+	var edit_buttons = document.getElementsByClassName("edit_button");
+	for(var i =0;i<edit_buttons.length;i++)
 	{
-		btns[i].onclick = edit_mode;
+		edit_buttons[i].onclick = edit_mode;
 	}
-}
+	
+	var no_buttons = document.getElementsByClassName("no_button");
+	for(var i =0;i<no_buttons.length;i++)
+	{
+		no_buttons[i].onclick = watch_mode;
+	}
+	
+	set_visible_by_classname("ok_button",false);
+	set_visible_by_classname("no_button",false);
+}	
 
+var mac_value;				//记录原来的mac地址
+var dept_value;				//记录原来的部门名称
+var noted_value;			//记录原来备注文本
 
-function edit_mode()
+function edit_mode()			//编辑模式
 {
-	//alert("点到我了");
+	set_visible_by_classname("edit_button",false);
+	set_visible_by_classname("delete_button",false);
+	set_visible_by_id("ok_"+this.name,true);
+	set_visible_by_id("no_"+this.name,true);
+	
 	var mac_col;
 	var dept_col;
 	var noted_col;
 	var col_nodes = this.parentNode.parentNode.childNodes;
 	for(var i=0;i<col_nodes.length;i++)
 	{
-		if(col_nodes[i].className == "col_mac")
+		switch(col_nodes[i].className)
 		{
-			mac_col = col_nodes[i];
+			case "mac_col":mac_col=col_nodes[i];break;
+			case "dept_col":dept_col=col_nodes[i];break;
+			case "noted_col":noted_col=col_nodes[i];
 		}
-		
-		if(col_nodes[i].className == "col_dept")
-		{
-			dept_col = col_nodes[i];
-		}
-		
-		if(col_nodes[i].className == "col_noted")
-		{
-			noted_col = col_nodes[i];
-		}		
-	}
 
-	mac_value = mac_col.innerHTML;				//记录原来的mac地址
-	dept_value = dept_col.innerHTML;			//记录原来的部门名称
-	noted_value = noted_col.innerHTML;			//记录原来备注文本
+	}
+	
+	mac_value = mac_col.innerHTML;
+	dept_value = dept_col.innerHTML;
+	noted_value = noted_col.innerHTML;
 	
 	var mac_input_text = document.createElement("input");	//修改mac地址的文本框
-	var dept_input_text = document.createElement("input");	//修改部门的下拉框
 	var dept_select = document.createElement("select");
 	var noted_input_text = document.createElement("input");	//修改备注的文本框
 	
-	mac_input_text.setAttribute("type","text");
+	mac_input_text.setAttribute("type","text");				//把mac地址列变成文本框，可编辑状态
 	mac_input_text.setAttribute("name",mac_value);
-	dept_input_text.setAttribute("type","text");
-	dept_input_text.setAttribute("name",dept_value);
-	
-	dept_input_text.setAttribute("name","dept_select");
-	depts_div = document.getElementById("dept_names");
-	var depts_array = get_depts(depts_div);
-	for(var i=0;i<depts_array.length;i++)
-	{
-		dept_select.add
-	}
-	dept_input_text.appendChild(dept_select);
 	mac_col.innerHTML = "";
 	mac_col.appendChild(mac_input_text);
 	mac_input_text.value=mac_value;
-	dept_col.innerHTML = "";	
-	dept_col.appendChild(dept_input_text);
-	dept_input_text.value=dept_value;
 	
+	noted_input_text.setAttribute("type","text");			//把备注列变成文本框，可编辑状态
+	noted_input_text.setAttribute("name",noted_value);
+	noted_col.innerHTML = "";
+	noted_col.appendChild(noted_input_text);
+	noted_input_text.value=noted_value;
+	
+	depts_div = document.getElementById("dept_names");		//把部门列变为选择下拉框
+	var depts_array = get_depts(depts_div);
+	for(var i=0;i<depts_array.length;i++)
+	{
+		var _option = document.createElement("option");
+		_option.innerHTML = depts_array[i];
+		dept_select.options.add(_option);
+		if(depts_array[i] == dept_value)
+		{
+			_option.selected = true;
+		}
+	}
+	dept_col.innerHTML = "";
+	dept_col.appendChild(dept_select);
+	return true;
 }
 
-function get_depts(elem)
+function watch_mode()				//查看模式
 {
-	//alert("get_depts");
+	var mac_col;
+	var dept_col;
+	var noted_col;
+	var col_nodes = this.parentNode.parentNode.childNodes;
+	for(var i=0;i<col_nodes.length;i++)
+	{
+		switch(col_nodes[i].className)
+		{
+			case "mac_col":mac_col=col_nodes[i];break;
+			case "dept_col":dept_col=col_nodes[i];break;
+			case "noted_col":noted_col=col_nodes[i];
+		}
+	}
+	var mac_childs = mac_col.childNodes;
+	for(var i=0;i<mac_childs.length;i++)
+	{
+		mac_col.removeChild(mac_childs[i]);
+	}
+	mac_col.innerHTML=mac_value;
+	
+	var dept_childs = dept_col.childNodes;
+	for(var i=0;i<dept_childs.length;i++)
+	{
+		dept_col.removeChild(dept_childs[i]);
+	}
+	dept_col.innerHTML = dept_value;
+	
+	var noted_childs = noted_col.childNodes;
+	for(var i=0;i<noted_childs.length;i++)
+	{
+		noted_col.removeChild(noted_childs[i]);
+	}
+	noted_col.innerHTML =  noted_value;
+	
+	set_visible_by_classname("edit_button",true);
+	set_visible_by_classname("delete_button",true);
+	set_visible_by_classname("ok_button",false);
+	set_visible_by_classname("no_button",false);
+}
+
+function get_depts(elem)			//获取页面中隐藏的部门
+{
 	var depts_nodes = elem.childNodes;
 	var depts_array = new Array();
 	if(depts_nodes)
@@ -84,4 +140,26 @@ function get_depts(elem)
 		}
 	}
 	return depts_array;
+}
+
+function set_visible_by_classname(className,isDisplay)			//通过class名来设置是否显示
+{
+	var dom_elements = document.getElementsByClassName(className);
+	var strDisplayWord = "none";
+	if(isDisplay)
+		strDisplayWord = "";
+	for(var i=0;i<dom_elements.length;i++)
+	{
+		dom_elements[i].style.display = strDisplayWord;
+	}
+}
+
+
+function set_visible_by_id(id,isDisplay)
+{
+	var dom_element = document.getElementById(id);
+	var strDisplayWord = "none";
+	if(isDisplay)
+		strDisplayWord = "";
+	dom_element.style.display = strDisplayWord;
 }

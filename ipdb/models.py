@@ -9,3 +9,8 @@ class Ipdb(models.Model):
     noted = models.CharField(max_length=100)
     def __str__(self):
         return self.mac_addr
+
+class Dept_names(models.Model):
+    dept_name = models.CharField(max_length=20,primary_key=True)
+    def __str__(self):
+        return self.dept_name
