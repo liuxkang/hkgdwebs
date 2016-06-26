@@ -2,16 +2,22 @@ window.onload = initAll;
 
 function initAll()
 {
-	var edit_buttons = document.getElementsByClassName("edit_button");
+	var edit_buttons = document.getElementsByClassName("edit_button");		//设置“修改”按钮的点击事件
 	for(var i =0;i<edit_buttons.length;i++)
 	{
 		edit_buttons[i].onclick = edit_mode;
 	}
 	
-	var no_buttons = document.getElementsByClassName("no_button");
+	var no_buttons = document.getElementsByClassName("no_button");			//设置“取消”按钮的点击事件
 	for(var i =0;i<no_buttons.length;i++)
 	{
-		no_buttons[i].onclick = watch_mode;
+		no_buttons[i].onclick = watch_mode;									//点击取消按钮后，视图恢复查看状态。
+	}
+	
+	var ok_buttons = document.getElementsByClassName("ok_button");		//设置“确定”按钮的点击事件
+	for(var i =0;i<ok_buttons.length;i++)
+	{
+		ok_buttons[i].onclick = post_data;
 	}
 	
 	set_visible_by_classname("ok_button",false);
@@ -53,13 +59,13 @@ function edit_mode()			//编辑模式
 	var noted_input_text = document.createElement("input");	//修改备注的文本框
 	
 	mac_input_text.setAttribute("type","text");				//把mac地址列变成文本框，可编辑状态
-	mac_input_text.setAttribute("name",mac_value);
+	mac_input_text.setAttribute("id",mac_value);
 	mac_col.innerHTML = "";
 	mac_col.appendChild(mac_input_text);
 	mac_input_text.value=mac_value;
 	
 	noted_input_text.setAttribute("type","text");			//把备注列变成文本框，可编辑状态
-	noted_input_text.setAttribute("name",noted_value);
+	noted_input_text.setAttribute("id",noted_value);
 	noted_col.innerHTML = "";
 	noted_col.appendChild(noted_input_text);
 	noted_input_text.value=noted_value;
@@ -77,6 +83,7 @@ function edit_mode()			//编辑模式
 		}
 	}
 	dept_col.innerHTML = "";
+	dept_select.setAttribute("id",dept_value);
 	dept_col.appendChild(dept_select);
 	return true;
 }
@@ -162,4 +169,30 @@ function set_visible_by_id(id,isDisplay)
 	if(isDisplay)
 		strDisplayWord = "";
 	dom_element.style.display = strDisplayWord;
+}
+
+function post_data()
+{
+	var changed_mac_value = document.getElementById(mac_value).value;
+	var select_obj = document.getElementById(dept_value);
+	var select_index = select_obj.selectedIndex;	
+	var changed_dept_value = select_obj.options[select_index].value;
+	var changed_noted_value = document.getElementById(noted_value).value;
+	var col_nodes = this.parentNode.parentNode.childNodes;
+	
+	var ip_value;
+	for(var i=0;i<col_nodes.length;i++)
+	{
+		if(col_nodes[i].className == "ip_col")
+		{
+			ip_value = col_nodes[i].innerHTML;
+		}
+	}
+	
+	var temp = '<form id="'+ip_value+'" name="post'+ip_value+'" method="post">';
+	document.write('<form id="'+ip_value+'" name="post'+ip_value+'" method="post"');
+	document.write('<input type="hidden" name="test_name" value="刘康的地址信息"');
+	document.write('</form>');
+	document.getElementById(ip_value).submit();
+	return true;
 }
