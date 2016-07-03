@@ -7,6 +7,8 @@ from ipdb.models import Ipdb
 # Create your views here。
 #@csrf_protect
 def ipdb(request):
+    page_index = 1;
+    page_length = 20;           #每一页的显示的数量
     if(request.method == "POST"):
         _ip_addr = request.POST['ip_addr']
         _mac_addr = request.POST['mac_addr']
@@ -17,6 +19,14 @@ def ipdb(request):
         ipdb_rec.dept = _dept
         ipdb_rec.noted = _noted
         ipdb_rec.save()
-    ipdata = Ipdb.objects.order_by("id")
-    depts_data = Dept_names.objects.all()
+    if(request.method == "GET"):
+        if(request.GET.getlist("page")):
+            page_index = int(request.GET["page"])
+    
+    ip_data = Ipdb.objects.order_by("id")
+    depts_data = Dept_names.objects.order_by("dept_name")
+    page_size = []
+    for i in range(1,int(len(ip_data)/page_length)+2):
+        page_size.append(i)
+    ip_data = ip_data[(page_index-1)*page_length:(page_index*page_length)]
     return render_to_response("ipdb/ipdb.html",locals())

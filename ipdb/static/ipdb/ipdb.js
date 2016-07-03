@@ -12,6 +12,7 @@ function initAll()
 	$('.delete_button').css("display","inline");
 	$('.ok_button').css("display","none");
 	$('.no_button').css("display","none");
+	$('.page_a').click(submit);
 }	
 
 
@@ -36,12 +37,9 @@ function edit_mode()			//编辑模式
 	noted_edit_input.setAttribute("type","text");
 	noted_edit_input.value = document.getElementById("noted_"+this.name).value;
 	
-	var dept_select = document.getElementById("dept_"+this.name);
-	dept_select.className="edit_mode";
+	dept_select = document.getElementById("dept_"+this.name);
 	dept_select.style.display = "inline";
 	document.getElementById("th_dept_"+this.name).style.display = "none";
-	
-	
 	for(var i=0;i<dept_select.options.length;i++)
 	{
 		if(dept_select.options[i].value == dept_value)
@@ -66,18 +64,21 @@ function watch_mode()				//查看模式
 	mac_edit_input.setAttribute("type","hidden");
 	noted_edit_input.setAttribute("type","hidden");
 	
-	var dept_select = document.getElementById("dept_"+this.name);
-	dept_select.className="watch_mode";
-	
+	document.getElementById("dept_"+this.name).style.display = "none";
 	document.getElementById("th_dept_"+this.name).innerHTML = dept_value;
 	document.getElementById("th_noted_"+this.name).innertHTML = noted_value;
 	document.getElementById("th_mac_"+this.name).innerHTML = mac_value;
-	
 	document.getElementById("th_dept_"+this.name).style.display = "inline";
 	document.getElementById("dept_"+this.name).style.display = "none";
 	document.getElementById("th_noted_"+this.name).style.display = "inline";
 	document.getElementById("th_mac_"+this.name).style.display = "inline";
-	
+
 	return true;
 }
 
+function submit()
+{
+	var page = this.id;
+	$('#page_form').append('<input type="hidden" name="page" value="'+page+'" />');
+	$('#page_form').submit();
+}

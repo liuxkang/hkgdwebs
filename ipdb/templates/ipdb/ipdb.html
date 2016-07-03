@@ -34,7 +34,6 @@
 			</div>
 		</nav>
 		<table class="table table-striped table-bordered table-hover datatable">
-			<caption>IP地址</caption>
 			<thead>
 				<tr>
 					<th>Vlan</th>
@@ -46,9 +45,9 @@
 			</thead>
 			
 			<tbody id="data_table">
-			{% for item in ipdata %}
+			{% for item in ip_data %}
 				<tr>
-					<form action={% url 'ipdb' %} method="post">
+					<form action="{% url 'ipdb' %}" method="post">
 					{% csrf_token %}
 					<th>{{item.vlan_id}}</th>
 					<th><input id="ip_{{item.ip_addr}}" class="watch_mode" type="hidden" name="ip_addr" value="{{item.ip_addr}}" />{{item.ip_addr}}</th>
@@ -72,6 +71,15 @@
 			{% endfor %}
 			</tbody>
 		</table>
+		<form id="page_form" action="{% url 'ipdb' %}" method="get">
+		<ul class="pagination">
+			<li><a href="#">&laquo;</a></li>
+			{% for page in page_size %}
+				<li><a id="{{page}}" class="page_a">{{page}}</a></li>
+			{% endfor %}
+			<li><a href="#">&raquo;</a></li>
+		</ul>
+		</form>
     </div>
 
 
