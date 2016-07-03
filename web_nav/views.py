@@ -6,14 +6,11 @@ from django.template import loader
 
 def web_nav(request):
     webdata = Web_nav.objects.all()
-    context = {
-        'webdata':webdata,
-    }
     return render_to_response("web_nav/web_nav.html",locals())
 
 def test(request):
-    testdata = Web_nav.objects.all()
-    context = {
-        'testdata':testdata,
-    }
+    test = "没有"
+    if(request.method == "POST"):
+        test = request.POST["test_value"]
+    #testdata = Web_nav.objects.all()
     return render_to_response("web_nav/test.html",locals())

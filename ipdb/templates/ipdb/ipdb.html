@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE  html>
 <html>
   <head>
 	<META HTTP-EQUIV="pragma" CONTENT="no-cache"> 
@@ -16,14 +16,9 @@
 	<script src="{% static 'ipdb/jquery-2.2.4.js' %}"></script>
 	<script src="{% static 'ipdb/ipdb.js' %}" ></script>
 	<link rel="stylesheet" type="text/css" href="{% static 'ipdb/ipdb.css' %}"> 
-	<div id="dept_names">
-		{% for item in depts_data %}
-		<p>{{ item.dept_name }}</p>
-		{% endfor %}
-	</div>
   </head>
 
-  <body>
+  <body> 
     <div class="container">
 		<nav class="navbar navbar-default" role="navigation">
 			<div class="navbar-header">
@@ -53,17 +48,26 @@
 			<tbody id="data_table">
 			{% for item in ipdata %}
 				<tr>
+					<form action={% url 'ipdb' %} method="post">
+					{% csrf_token %}
 					<th>{{item.vlan_id}}</th>
-					<th class="ip_col">{{item.ip_addr}}</th>
-					<th class="mac_col">{{item.mac_addr}}</th>
-					<th class="dept_col">{{item.dept}}</th>
-					<th class="noted_col">{{item.noted}}</th>
-					<th>
-						<button id="edit_{{item.ip_addr}}" class="edit_button" name="{{item.ip_addr}}">修改</button>
-						<button id="delete_{{item.ip_addr}}" class="delete_button" name="{{item.ip_addr}}">清除</button>
-						<button id="ok_{{item.ip_addr}}" class="ok_button" name="{{item.ip_addr}}">确定</button>
-						<button id="no_{{item.ip_addr}}" class="no_button" name="{{item.ip_addr}}">取消</button>
+					<th><input id="ip_{{item.ip_addr}}" class="watch_mode" type="hidden" name="ip_addr" value="{{item.ip_addr}}" />{{item.ip_addr}}</th>
+					<th><input id="mac_{{item.ip_addr}}" class="watch_mode" type="hidden" name="mac_addr" value="{{item.mac_addr}}" /><div id="th_mac_{{item.ip_addr}}">{{item.mac_addr}}</div></th>					
+					<th><div id="th_dept_{{item.ip_addr}}">{{item.dept}}</div>
+						<select id="dept_{{item.ip_addr}}" class="watch_mode" name="dept">
+						{% for dept in depts_data %}
+							<option value="{{dept}}">{{dept}}</option>
+						{% endfor %}
+						</select>	
 					</th>
+					<th><input id="noted_{{item.ip_addr}}" class="watch_mode" type="hidden" name="noted" value="{{item.noted}}" /><div id="th_noted_{{item.ip_addr}}">{{item.noted}}</div></th>
+					<th>
+						<button class="edit_button" type="button" name="{{item.ip_addr}}" value="edit">修改</button>
+						<button class="delete_button" type="button" name="{{item.ip_addr}}" value="delete">清除</button>
+						<button class="ok_button" id="ok_{{item.ip_addr}}" type="submit" name="{{item.ip_addr}}" value="yes">确定</button>
+						<button class="no_button" id="no_{{item.ip_addr}}" type="button" name="{{item.ip_addr}}" value="no">取消</button>
+					</th>
+					</form>
 				</tr>
 			{% endfor %}
 			</tbody>
