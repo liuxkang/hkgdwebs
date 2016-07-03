@@ -1,3 +1,4 @@
+/*
 window.onload = initPage;
 function initPage()
 {
@@ -9,3 +10,4 @@ function change_value()
 {
 	this.innerHTML="chang_value函数调用";
 }
+*/
