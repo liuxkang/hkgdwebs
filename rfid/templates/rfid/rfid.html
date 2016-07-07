@@ -1,0 +1,93 @@
+<!DOCTYPE  html>
+<html>
+  <head>
+	<META HTTP-EQUIV="pragma" CONTENT="no-cache"> 
+	<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate"> 
+	<META HTTP-EQUIV="expires" CONTENT="0">
+    <title>河口瑶族自治县供电有限责任公司——RFID登记</title>
+	{% load staticfiles %}
+	<script src="{% static 'rfid/jquery-2.2.4.js' %}"></script>
+	<script src="{% static 'rfid/rfid.js' %}" ></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'rfid/rfid.css' %}"> 
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% bootstrap_messages %}  
+  </head>
+
+  <body> 
+    <div class="container">
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">河口供电</a>
+			</div>
+			<div class="collapse navbar-collapse" id="example-navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="{% url 'index' %}">网页导航</a></li>
+					<li><a href="{% url 'ipdb' %}">IP地址管理</a></li>
+					<li class="active"><a href="#">RFID登记</a><li>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<table class="table table-striped table-bordered table-hover datatable">
+			<thead>
+				<tr>
+					<th>RFID</th>
+					<th>资产类型</th>
+					<th>序列号</th>
+					<th>部门</th>
+					<th>使用人</th>
+					<th>购入时间</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			
+			<tbody id="data_table">
+			{% for item in rfid_data %}
+				<tr>
+					<form action="{% url 'rfid' %}" method="post">
+					{% csrf_token %}
+					<th><input name="rfid" value="{{item.rfid}}" />{{item.rfid}}</th>
+					<th><div id="th_type_{{item.rfid}}">{{item.it_type}}</div>
+						<select id="type_{{item.rfid}}" name="it_type" />
+						{% for type in type_data %}
+							<option value="{{type}}">{{type}}</option>
+						{% endfor %}
+					</th>	
+			
+					<th><input id="sn_{{item.rfid}}" name="sn" value="{{item.sn}}" /><div id="th_sn_{{item.rfid}}">{{item.sn}}</div></th>
+					<th><div id="th_dept_{{item.rfid}}">{{item.dept}}</div>
+						<select id="dept_{{item.rfid}}" name="dept">
+						{% for dept in depts_data %}
+							<option value="{{dept}}">{{dept}}</option>
+						{% endfor %}
+						</select>
+					</th>
+					</th>
+					<th><input id="user_{{item.rfid}}" name="user" value="{{item.user}}" /><div id="th_user_{{item.rfid}}">{{item.user}}</div></th>
+					<th><input id="time_{{item.rfid}}" name="time" value="{{item.date}}" type="date" /><div id="th_time_{{item.rfid}}">{{item.time}}</div></th>
+					<th>
+						<button id="{{item.rfid}}" class="edit_button" type="button" value="edit">修改</button>
+						<button class="ok_button" id="ok_{{item.rfid}}" type="submit" value="yes">确定</button>
+						<button class="no_button" id="no_{{item.rfid}}" type="button" value="no">取消</button>
+					</th>
+					</form>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+		<form id="page_form" action="{% url 'rfid' %}" method="get">
+		<ul class="pagination">
+			<li><a href="#">&laquo;</a></li>
+			{% for page in page_size %}
+				<li><a id="{{page}}" class="page_a">{{page}}</a></li>
+			{% endfor %}
+			<li><a href="#">&raquo;</a></li>
+		</ul>
+		</form>
+    </div>
+
+
+  </body>
+</html>

@@ -17,9 +17,11 @@ from django.conf.urls import url,include
 from django.contrib import admin
 import ipdb.views
 import web_nav.views
+import rfid.views
 urlpatterns = [
     url(r'^$',web_nav.views.web_nav,name="index"),
     url(r'^admin/',admin.site.urls),
     url(r'^ipdb/',ipdb.views.ipdb,name="ipdb"),
+    url(r'^rfid/',rfid.views.rfid,name="rfid"),
     url(r'^test/',web_nav.views.test,name="test"),
 ]

@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ipdb.apps.IpdbConfig',
-    'web_nav',
+    'web_nav.apps.WebNavConfig',
+    'rfid.apps.RfidConfig',
     'bootstrap3',
     #'mod_wsgi',
 ]
