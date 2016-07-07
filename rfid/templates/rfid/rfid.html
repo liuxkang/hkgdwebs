@@ -46,7 +46,7 @@
 			<tbody id="data_table">
 			{% for item in rfid_data %}
 				<tr>
-					<form action="{% url 'rfid' %}" method="post">
+					<form class="{{item.rfid}}" action="{% url 'rfid' %}" method="post">
 					{% csrf_token %}
 					<th><input name="rfid" value="{{item.rfid}}" />{{item.rfid}}</th>
 					<th><div id="th_type_{{item.rfid}}">{{item.it_type}}</div>
@@ -68,9 +68,9 @@
 					<th><input id="user_{{item.rfid}}" name="user" value="{{item.user}}" /><div id="th_user_{{item.rfid}}">{{item.user}}</div></th>
 					<th><input id="time_{{item.rfid}}" name="time" value="{{item.date}}" type="date" /><div id="th_time_{{item.rfid}}">{{item.time}}</div></th>
 					<th>
-						<button id="{{item.rfid}}" class="edit_button" type="button" value="edit">修改</button>
-						<button class="ok_button" id="ok_{{item.rfid}}" type="submit" value="yes">确定</button>
-						<button class="no_button" id="no_{{item.rfid}}" type="button" value="no">取消</button>
+						<button id="{{item.rfid}}"  type="button" value="edit_button">修改</button>
+						<button id="ok_{{item.rfid}}" type="button" value="ok_button">确定</button>
+						<button id="no_{{item.rfid}}" type="button" value="no_button">取消</button>
 					</th>
 					</form>
 				</tr>

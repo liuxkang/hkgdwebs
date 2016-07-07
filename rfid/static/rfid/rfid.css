@@ -9,3 +9,8 @@ input.watch_mode{
 .hide_mode{
 	display:none;
 }
+
+input.invalid{
+	background-color:#FF9;
+	border:2px red inset;
+}
