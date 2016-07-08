@@ -26,7 +26,7 @@ def rfid(request):
         if(request.GET.getlist("page")):
             page_index = int(request.GET["page"])
     
-    rfid_data = Rfid.objects.order_by("rfid")
+    rfid_data = Rfid.objects.order_by('id')
     depts_data = Dept_names.objects.order_by("dept_name")
     page_size = []
     for i in range(1,int(len(rfid_data)/page_length)+2):

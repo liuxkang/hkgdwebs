@@ -33,6 +33,7 @@
 		<table class="table table-striped table-bordered table-hover datatable">
 			<thead>
 				<tr>
+					<th>ID</th>
 					<th>RFID</th>
 					<th>资产类型</th>
 					<th>序列号</th>
@@ -48,6 +49,7 @@
 				<tr>
 					<form class="{{item.rfid}}" action="{% url 'rfid' %}" method="post">
 					{% csrf_token %}
+					<th>{{item.id}}</th>
 					<th><input name="rfid" value="{{item.rfid}}" />{{item.rfid}}</th>
 					<th><div id="th_type_{{item.rfid}}">{{item.it_type}}</div>
 						<select id="type_{{item.rfid}}" name="it_type" />

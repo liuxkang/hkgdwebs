@@ -8,6 +8,7 @@ class Rfid(models.Model):
     dept = models.CharField(max_length=30,null=True)
     user = models.CharField(max_length=10,null=True)
     time = models.DateField(null=True)
+    id = models.IntegerField()
     def __str__(self):
         return self.rfid
 
