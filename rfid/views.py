@@ -7,12 +7,12 @@ def rfid(request):
     page_index = 1;
     page_length = 20;           #每一页的显示的数量
     if(request.method == "POST"):
-        _rfid = request.POST['rfid']
-        _it_type = request.POST['it_type']
-        _sn = request.POST['sn']
-        _dept = request.POST['dept']
-        _user = request.POST['user']
-        _time = request.POST['time']
+        _rfid = request.POST.get('rfid','')
+        _it_type = request.POST.get('it_type','')
+        _sn = request.POST.get('sn','')
+        _dept = request.POST.get('dept','')
+        _user = request.POST.get('user','')
+        _time = request.POST.get('time','1980-7-7')
         rfid_rec = Rfid.objects.get(rfid = _rfid)
         rfid_rec.rfid = _rfid
         rfid_rec.it_type = _it_type

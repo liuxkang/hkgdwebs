@@ -10,10 +10,10 @@ def ipdb(request):
     page_index = 1;
     page_length = 20;           #每一页的显示的数量
     if(request.method == "POST"):
-        _ip_addr = request.POST['ip_addr']
-        _mac_addr = request.POST['mac_addr']
-        _dept = request.POST['dept']
-        _noted = request.POST['noted']
+        _ip_addr = request.POST.get('ip_addr','')
+        _mac_addr = request.POST.get('mac_addr','')
+        _dept = request.POST.get('dept','')
+        _noted = request.POST.get('noted','')
         ipdb_rec = Ipdb.objects.get(ip_addr = _ip_addr)
         ipdb_rec.mac_addr = _mac_addr
         ipdb_rec.dept = _dept
