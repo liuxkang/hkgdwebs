@@ -62,7 +62,7 @@ function edit_mode()			//编辑模式
 	time_value = time_value.replace("日","");
 	$('input[id="time_'+this.id+'"]').val(time_value);
 	
-	rfid_value = $('button[value="edit_button"]').get(0).id;
+	rfid_value = this.id;
 	return true;
 }
 
@@ -80,7 +80,7 @@ function watch_mode()				//查看模式
 	$('div[id="th_user_'+this.id+'"]').val(user_value);
 	$('div[id="th_dept_'+this.id+'"]').val(dept_value);
 	$('div[id="th_type_'+this.id+'"]').val(type_value);
-	$('div[id="th_time_'+this.id+'"]').val(time);
+	$('div[id="th_time_'+this.id+'"]').val(time_value);
 	return true;
 }
 
@@ -93,7 +93,7 @@ function submit()
 
 function Check_2_Submit()
 {
-	var time_value = $('input[id="time_'+rfid_value+'"]').val();
+	time_value = $('input[id="time_'+rfid_value+'"]').get(0).value;
 	var re = /^(\d{4})-(\d{1,2})-(\d{1,2})$/;
 	var result = re.test(time_value);
 	if(result == true){
