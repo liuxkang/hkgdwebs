@@ -1,6 +1,11 @@
 $(document).ready(initAll);
 
 var rfid_value;
+var type_value;
+var sn_value;
+var user_value;
+var dept_value;
+var time_value;
 
 function initAll()
 {
@@ -39,14 +44,19 @@ function edit_mode()			//编辑模式
 	$('button[id="ok_'+this.id+'"]').removeClass().addClass("show_mode");
 	$('button[id="no_'+this.id+'"]').removeClass().addClass("show_mode");
 	
+	sn_value = $('div[id="th_sn_'+this.id+'"]').text();
+	$('input[id="dept_'+this.id+'"]').val(sn_value);
 	
-	var dept_value = $('div[id="th_dept_'+this.id+'"]').text();
+	user_value = $('div[id="th_user_'+this.id+'"]').text();
+	$('input[id="user_'+this.id+'"]').val(user_value);
+	
+	dept_value = $('div[id="th_dept_'+this.id+'"]').text();
 	$('select[id="dept_'+this.id+'"]').val(dept_value);
 
-	var type_value = $('div[id="th_type_'+this.id+'"]').text();
+	type_value = $('div[id="th_type_'+this.id+'"]').text();
 	$('select[id="type_'+this.id+'"]').val(type_value);
 	
-	var time_value = $('div[id="th_time_'+this.id+'"]').text();
+	time_value = $('div[id="th_time_'+this.id+'"]').text();
 	time_value = time_value.replace("年","-");
 	time_value = time_value.replace("月","-");
 	time_value = time_value.replace("日","");
@@ -58,15 +68,19 @@ function edit_mode()			//编辑模式
 
 function watch_mode()				//查看模式
 {
-	location.reload();
-	/*
+
 	$('button[value="edit_button"]').removeClass().addClass("show_mode");
 	$('button[value="ok_button"]').removeClass().addClass("hide_mode");
 	$('button[value="no_button"]').removeClass().addClass("hide_mode");
 	$('input').removeClass().addClass("hide_mode");
 	$('select').removeClass().addClass("hide_mode");
 	$('div').removeClass().addClass("show_mode");
-	*/
+
+	$('div[id="th_sn_'+this.id+'"]').val(sn_value);
+	$('div[id="th_user_'+this.id+'"]').val(user_value);
+	$('div[id="th_dept_'+this.id+'"]').val(dept_value);
+	$('div[id="th_type_'+this.id+'"]').val(type_value);
+	$('div[id="th_time_'+this.id+'"]').val(time);
 	return true;
 }
 
