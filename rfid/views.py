@@ -13,7 +13,7 @@ def rfid(request):
         _dept = request.POST.get('dept','')
         _user = request.POST.get('user','')
         _time = request.POST.get('time','1980-7-7')
-        page_index = int(request.POST.get('page_index','1'))
+        page_index = int(request.POST.get('page_index')) 
         rfid_rec = Rfid.objects.get(rfid = _rfid)
         rfid_rec.rfid = _rfid
         rfid_rec.it_type = _it_type
