@@ -10,7 +10,7 @@ class Rfid(models.Model):
     time = models.DateField(null=True)
     id = models.IntegerField()
     def __str__(self):
-        return self.rfid
+        return self.id
 
 class It_types(models.Model):
     type_name = models.CharField(max_length=30,primary_key=True)
