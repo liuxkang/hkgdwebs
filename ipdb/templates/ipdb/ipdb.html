@@ -31,16 +31,20 @@
 			</div>
 		</nav>
 		<div>
-			<ul id="check_area">
-				<li>
-					<label for="Vlan201">Vlan201</label>
-					<input id="Vlan201" type="checkbox" />
-				</li>
-				<li>
-					<label for="Vlan202">Vlan202</label>
-					<input id="Vlan202" type="checkbox" />
-				</li>
-			</ul>
+			<form id="vlan_form" action="{% url 'ipdb' %}" method="post">
+				<input type="hidden"  name="post_type" value="vlan_data">
+				<ul id="check_area">
+				{% for key,value in vlan_data.items %}
+					<li>
+						<label for="vlan_{{key}}">{{key}}</label>
+						<input id="vlan_{{key}}" type="checkbox" name="{{key}}" value="{{value}}" {% if value == "1" %} checked="checked" {%endif%} />
+					</li>
+				{% endfor %}
+					<li>
+						
+					</li>
+				</ul>
+			</form>
 		</div>
 		<table class="table table-striped table-bordered table-hover datatable">
 			<thead>
@@ -59,22 +63,23 @@
 				<tr>
 					<form action="{% url 'ipdb' %}" method="post">
 					{% csrf_token %}
+					<input type="hidden"  name="post_type" value="db_data">
 					<th>{{item.vlan_id}}</th>
-					<th><input type="hidden" name="ip_addr" value="{{item.ip_addr}}" />{{item.ip_addr}}</th>
-					<th><input id="mac_{{item.ip_addr}}" name="mac_addr" value="{{item.mac_addr}}" /><div id="div_mac_{{item.ip_addr}}">{{item.mac_addr}}</div></th>					
+					<th><input class="hide_mode" type="hidden" name="ip_addr" value="{{item.ip_addr}}" />{{item.ip_addr}}</th>
+					<th><input class="hide_mode" id="mac_{{item.ip_addr}}" name="mac_addr" value="{{item.mac_addr}}" /><div id="div_mac_{{item.ip_addr}}">{{item.mac_addr}}</div></th>					
 					<th><div id="div_dept_{{item.ip_addr}}">{{item.dept}}</div>
-						<select id="dept_{{item.ip_addr}}" name="dept">
+						<select class="hide_mode" id="dept_{{item.ip_addr}}" name="dept">
 						{% for dept in depts_data %}
 							<option value="{{dept}}">{{dept}}</option>
 						{% endfor %}
 						</select>	
 					</th>
-					<th><input id="noted_{{item.ip_addr}}" name="noted" value="{{item.noted}}" /><div id="div_noted_{{item.ip_addr}}">{{item.noted}}</div></th>
+					<th><input id="noted_{{item.ip_addr}}" class="hide_mode" name="noted" value="{{item.noted}}" /><div id="div_noted_{{item.ip_addr}}">{{item.noted}}</div></th>
 					<th>
 						<button id="edit_{{item.ip_addr}}" type="button" name="{{item.ip_addr}}">修改</button>
 						<button id="delete_{{item.ip_addr}}" type="button">清除</button>
-						<button id="ok_{{item.ip_addr}}" type="submit">确定</button>
-						<button id="no_{{item.ip_addr}}" type="button">取消</button>
+						<button id="ok_{{item.ip_addr}}" type="submit" class="hide_mode">确定</button>
+						<button id="no_{{item.ip_addr}}" type="button" class="hide_mode">取消</button>
 					</th>
 					</form>
 				</tr>
@@ -91,7 +96,5 @@
 		</ul>
 		</form>
     </div>
-
-
   </body>
 </html>

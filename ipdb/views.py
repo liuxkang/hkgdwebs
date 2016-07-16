@@ -9,7 +9,13 @@ from ipdb.models import Ipdb
 def ipdb(request):
     page_index = 1;
     page_length = 20;           #每一页的显示的数量
-    if(request.method == "POST"):
+    vlan_data ={
+        "Vlan201":'1',
+        "Vlan202":'0',
+        "Vlan203":'0',
+    }
+    ip_data = Ipdb.objects.all().filter(vlan_id='none')
+    if(request.method == "POST" and request.POST["post_type"]=="db_data"):
         _ip_addr = request.POST.get('ip_addr','')
         _mac_addr = request.POST.get('mac_addr','')
         _dept = request.POST.get('dept','')
@@ -19,11 +25,23 @@ def ipdb(request):
         ipdb_rec.dept = _dept
         ipdb_rec.noted = _noted
         ipdb_rec.save()
+        
+    if(request.method == "POST" and request.POST["post_type"]=="vlan_data"):
+        for key in vlan_data.keys():
+            vlan_data[key] = request.POST.get(key,'0')
+            
+        
     if(request.method == "GET"):
         if(request.GET.getlist("page")):
             page_index = int(request.GET["page"])
     
-    ip_data = Ipdb.objects.order_by("id")
+    for key in vlan_data.keys():
+        if(vlan_data[key] == '1'):
+            ip_data |= Ipdb.objects.all().filter(vlan_id=key)
+    
+    #ip_data = Ipdb.objects.all().filter(vlan_id='Vlan201')
+    #ip_data |= Ipdb.objects.all().filter(vlan_id='Vlan202')
+    ip_data = ip_data.order_by("id")
     depts_data = Dept_names.objects.order_by("dept_name")
     page_size = []
     for i in range(1,int(len(ip_data)/page_length)+2):
