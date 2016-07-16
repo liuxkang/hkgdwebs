@@ -9,8 +9,9 @@ function initAll()
 {
 	$('button[id^="edit"]').click(edit_mode);				//设置“修改”按钮的点击事件
 	$('button[id^="no"]').click(watch_mode);				//设置“取消”按钮的点击事件	
-	$('.page_a').click(change_page);
-	$('input[id^="vlan_"]').click(vlan_checked);
+	$('a[id^="a"]').click(change_page);
+	$('input[id^="vlan_"]').click(post_vlan);
+	$('button[id^="ok_"]').click(post_data);
 }	
 
 
@@ -51,12 +52,12 @@ function watch_mode()				//查看模式
 
 function change_page()
 {
-	var page = this.id;
+	var page = this.innerHTML;
 	$('#page_form').append('<input type="hidden" name="page" value="'+page+'" />');
 	$('#page_form').submit();
 }
 
-function vlan_checked()
+function post_vlan()
 {
 	if(this.checked == true)
 	{
@@ -67,4 +68,10 @@ function vlan_checked()
 		this.value = "0";
 	}
 	$('#vlan_form').submit();
+}
+
+function post_data()
+{
+	$('#vlan_form').submit();
+	$('form[id="data_'+ip_value+'"]').submit();
 }

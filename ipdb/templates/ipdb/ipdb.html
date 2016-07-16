@@ -32,7 +32,7 @@
 		</nav>
 		<div>
 			<form id="vlan_form" action="{% url 'ipdb' %}" method="post">
-				<input type="hidden"  name="post_type" value="vlan_data">
+			<input type="hidden"  name="post_type" value="vlan_data" />
 				<ul id="check_area">
 				{% for key,value in vlan_data.items %}
 					<li>
@@ -40,9 +40,6 @@
 						<input id="vlan_{{key}}" type="checkbox" name="{{key}}" value="{{value}}" {% if value == "1" %} checked="checked" {%endif%} />
 					</li>
 				{% endfor %}
-					<li>
-						
-					</li>
 				</ul>
 			</form>
 		</div>
@@ -61,9 +58,15 @@
 			<tbody id="data_table">
 			{% for item in ip_data %}
 				<tr>
-					<form action="{% url 'ipdb' %}" method="post">
-					{% csrf_token %}
-					<input type="hidden"  name="post_type" value="db_data">
+					<form id="data_{{item.ip_addr}}" action="{% url 'ipdb' %}" method="post">
+					{% csrf_token %}	
+					
+					<input type="hidden" name="post_type" value="db_data" />
+					{% for key,value in vlan_data.items %}
+						<input type="hidden" name="{{key}}" value="{{value}}" />
+					{% endfor %}
+					<input type="hidden" name="page" value="{{page_index}}" />
+					
 					<th>{{item.vlan_id}}</th>
 					<th><input class="hide_mode" type="hidden" name="ip_addr" value="{{item.ip_addr}}" />{{item.ip_addr}}</th>
 					<th><input class="hide_mode" id="mac_{{item.ip_addr}}" name="mac_addr" value="{{item.mac_addr}}" /><div id="div_mac_{{item.ip_addr}}">{{item.mac_addr}}</div></th>					
@@ -78,7 +81,7 @@
 					<th>
 						<button id="edit_{{item.ip_addr}}" type="button" name="{{item.ip_addr}}">修改</button>
 						<button id="delete_{{item.ip_addr}}" type="button">清除</button>
-						<button id="ok_{{item.ip_addr}}" type="submit" class="hide_mode">确定</button>
+						<button id="ok_{{item.ip_addr}}" type="button" class="hide_mode">确定</button>
 						<button id="no_{{item.ip_addr}}" type="button" class="hide_mode">取消</button>
 					</th>
 					</form>
@@ -86,14 +89,18 @@
 			{% endfor %}
 			</tbody>
 		</table>
-		<form id="page_form" action="{% url 'ipdb' %}" method="get">
-		<ul class="pagination">
-			<li><a href="#">&laquo;</a></li>
-			{% for page in page_size %}
-				<li><a id="{{page}}" class="page_a">{{page}}</a></li>
+		<form id="page_form" action="{% url 'ipdb' %}" method="post" >
+			<input type="hidden" name="post_type" value="paging" />
+			{% for key,value in vlan_data.items %}
+				<input type="hidden" name="{{key}}" value="{{value}}" />
 			{% endfor %}
-			<li><a href="#">&raquo;</a></li>
-		</ul>
+			<ul class="pagination">
+				<li><a href="#">&laquo;</a></li>
+				{% for page in page_size %}
+					<li><a id="a_{{page}}" {% if page_index == page %} class="checked" {% endif %}>{{page}}</a></li>
+				{% endfor %}
+				<li><a href="#">&raquo;</a></li>
+			</ul>
 		</form>
     </div>
   </body>
