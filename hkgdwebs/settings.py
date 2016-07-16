@@ -140,3 +140,5 @@ LOCALES=(
     ('zh-hans', u'简体中文'),
 )
 TEMPLATE_DEBUG = False
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

@@ -15,3 +15,9 @@ a.checked
 	font-size:20px;
 }
 
+#check_area > li
+{
+	list-style:none;
+	width:200px;
+	float:left;
+}

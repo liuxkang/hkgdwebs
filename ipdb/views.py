@@ -7,37 +7,47 @@ from ipdb.models import Ipdb
 # Create your views here。
 #@csrf_protect
 def ipdb(request):
-    page_index = 1
     page_length = 20           #每一页的显示的数量
     vlan_data ={
         "Vlan201":'1',
         "Vlan202":'0',
         "Vlan203":'0',
     }
+    show_all = request.session.get("is_show_all","0")
     ip_data = Ipdb.objects.filter(vlan_id='none')
+    page_index = int(request.session.get("page_index","1"))
+    vlan_data = request.session.get("vlan_data",vlan_data)
+    
     if(request.method == "POST" and request.POST["post_type"] == "db_data"):
         _ip_addr = request.POST.get('ip_addr','')
         _mac_addr = request.POST.get('mac_addr','')
         _dept = request.POST.get('dept','')
         _noted = request.POST.get('noted','')
-        page_index = int(request.POST.get("page"))
         ipdb_rec = Ipdb.objects.get(ip_addr = _ip_addr)
         ipdb_rec.mac_addr = _mac_addr
         ipdb_rec.dept = _dept
         ipdb_rec.noted = _noted
         ipdb_rec.save()
-        for key in vlan_data.keys():
-            vlan_data[key] = request.POST.get(key,'0')
             
     if(request.method == "POST" and request.POST["post_type"] == "vlan_data"):
         for key in vlan_data.keys():
             vlan_data[key] = request.POST.get(key,'0')
-            
+        request.session["vlan_data"] = vlan_data;
+
     if(request.method == "POST" and request.POST["post_type"] == "paging"):
         page_index = int(request.POST.get("page",1))
-        for key in vlan_data.keys():
-            vlan_data[key] = request.POST.get(key,'0')
-
+        request.session["page_index"] = page_index;
+    
+    if(request.method == "POST" and request.POST["post_type"] == "show_all"):
+        show_all = request.POST.get("show_all_flag","0")
+        if(show_all == "1"):
+            for key in vlan_data.keys():
+                vlan_data[key] = '1'
+        
+    if(show_all == "1"):
+        page_length = len(Ipdb.objects.all())
+    else:
+        page_length = 20
     
     for key in vlan_data.keys():
         if(vlan_data[key] == '1'):

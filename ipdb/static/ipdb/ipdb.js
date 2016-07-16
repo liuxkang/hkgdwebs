@@ -12,6 +12,7 @@ function initAll()
 	$('a[id^="a"]').click(change_page);
 	$('input[id^="vlan_"]').click(post_vlan);
 	$('button[id^="ok_"]').click(post_data);
+	$('#show_all').click(show_all_data);
 }	
 
 
@@ -74,4 +75,18 @@ function post_data()
 {
 	$('#vlan_form').submit();
 	$('form[id="data_'+ip_value+'"]').submit();
+}
+
+function show_all_data()
+{
+	var v = this.value;
+	if(this.checked == true)
+	{
+		this.value = "1";
+	}
+	else
+	{
+		this.value = "0";
+	}
+	$('#show_all_form').submit();
 }
