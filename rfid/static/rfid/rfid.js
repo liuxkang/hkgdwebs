@@ -16,7 +16,7 @@ function initAll()
 	$('button[value="edit_button"]').addClass("show_mode");
 	$('button[value="ok_button"]').addClass("hide_mode").click(Check_2_Submit);
 	$('button[value="no_button"]').addClass("hide_mode");
-	$('.page_a').click(change_page);
+	$('a[name="page_index"').click(change_page);
 }	
 
 
@@ -87,7 +87,7 @@ function watch_mode()				//查看模式
 function change_page()
 {
 	page = this.id;
-	$('#page_form').append('<input type="hidden" name="page" value="'+page+'" />');
+	$('#page_form').append('<input type="hidden" name="page_index" value="'+page+'" />');
 	$('#page_form').submit();
 }
 
