@@ -13,7 +13,7 @@ def ipdb(request):
         "Vlan202":'0',
         "Vlan203":'0',
     }
-    show_all = request.session.get("is_show_all","0")
+    show_all_flag = request.session.get("show_all_flag",'0')
     ip_data = Ipdb.objects.filter(vlan_id='none')
     page_index = int(request.session.get("page_index","1"))
     vlan_data = request.session.get("vlan_data",vlan_data)
@@ -39,13 +39,15 @@ def ipdb(request):
         request.session["page_index"] = page_index;
     
     if(request.method == "POST" and request.POST["post_type"] == "show_all"):
-        show_all = request.POST.get("show_all_flag","0")
-        if(show_all == "1"):
+        request.session["show_all_flag"] = request.POST.get("show_all_flag","0")
+        show_all_flag = request.session["show_all_flag"]
+        if(show_all_flag == "1"):
             for key in vlan_data.keys():
                 vlan_data[key] = '1'
         
-    if(show_all == "1"):
+    if(show_all_flag == "1"):
         page_length = len(Ipdb.objects.all())
+        page_index = 1
     else:
         page_length = 20
     
@@ -56,7 +58,10 @@ def ipdb(request):
     ip_data = ip_data.order_by("id")
     depts_data = Dept_names.objects.order_by("dept_name")
     page_size = []
-    for i in range(1,int(len(ip_data)/page_length)+2):
-        page_size.append(i)
+    if len(ip_data) <= page_length:
+        page_size.append(1)
+    else:
+        for i in range(1,int(len(ip_data) / page_length)+2):
+            page_size.append(i)
     ip_data = ip_data[(page_index-1)*page_length:(page_index*page_length)]
     return render_to_response("ipdb/ipdb.html",locals())
