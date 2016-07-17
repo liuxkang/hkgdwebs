@@ -2,10 +2,22 @@ input.watch_mode{
 	height:30px;
 }
 
-select.watch_mode{
+.show_mode{
+	display:inline;
+}
+
+.hide_mode{
 	display:none;
 }
 
-select.edit_mode{
-	display:inline;
+a.checked
+{
+	font-size:20px;
+}
+
+#check_area > li
+{
+	list-style:none;
+	width:200px;
+	float:left;
 }
