@@ -50,31 +50,30 @@
 					<form class="{{item.rfid}}" action="{% url 'rfid' %}" method="post">
 					{% csrf_token %}
 					<th>{{item.id}}</th>
-					<th><input name="rfid" value="{{item.rfid}}" />{{item.rfid}}</th>
+					<th><input name="rfid" type="hidden" value="{{item.rfid}}" />{{item.rfid}}</th>
 					<th><div id="th_type_{{item.rfid}}">{{item.it_type}}</div>
-						<select id="type_{{item.rfid}}" name="it_type" />
+						<select id="type_{{item.rfid}}" class="hide_mode" name="it_type" />
 						{% for type in type_data %}
 							<option value="{{type}}">{{type}}</option>
 						{% endfor %}
 					</th>	
 			
-					<th><input id="sn_{{item.rfid}}" name="sn" value="{{item.sn}}" /><div id="th_sn_{{item.rfid}}">{{item.sn}}</div></th>
+					<th><input id="sn_{{item.rfid}}" class="hide_mode" name="sn" value="{{item.sn}}" /><div id="th_sn_{{item.rfid}}">{{item.sn}}</div></th>
 					<th><div id="th_dept_{{item.rfid}}">{{item.dept}}</div>
-						<select id="dept_{{item.rfid}}" name="dept">
+						<select id="dept_{{item.rfid}}" class="hide_mode" name="dept">
 						{% for dept in depts_data %}
 							<option value="{{dept}}">{{dept}}</option>
 						{% endfor %}
 						</select>
 					</th>
 					</th>
-					<th><input id="user_{{item.rfid}}" name="user" value="{{item.user}}" /><div id="th_user_{{item.rfid}}">{{item.user}}</div></th>
-					<th><input id="time_{{item.rfid}}" name="time" value="{{item.date}}" /><div id="th_time_{{item.rfid}}">{{item.time}}</div></th>
+					<th><input id="user_{{item.rfid}}" class="hide_mode" name="user" value="{{item.user}}" /><div id="th_user_{{item.rfid}}">{{item.user}}</div></th>
+					<th><input id="time_{{item.rfid}}" class="hide_mode" name="time" value="{{item.date}}" /><div id="th_time_{{item.rfid}}">{{item.time}}</div></th>
 					<th>
-						<button id="{{item.rfid}}"  type="button" value="edit_button">修改</button>
-						<button id="ok_{{item.rfid}}" type="button" value="ok_button">确定</button>
-						<button id="no_{{item.rfid}}" type="button" value="no_button">取消</button>
+						<button id="{{item.rfid}}" type="button" value="edit_button">修改</button>
+						<button id="ok_{{item.rfid}}" class="hide_mode" type="button" value="ok_button">确定</button>
+						<button id="no_{{item.rfid}}" class="hide_mode" type="button" value="no_button">取消</button>
 					</th>
-					<input type="hidden" name="page_index" value="{{page_index}}" />
 					</form>
 				</tr>
 			{% endfor %}
@@ -89,7 +88,6 @@
 			<li><a href="#">&raquo;</a></li>
 		</ul>
 		</form>
-		<p>{{test}}</p>
     </div>
 
 
