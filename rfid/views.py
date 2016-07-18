@@ -28,12 +28,14 @@ def rfid(request):
     
     rfid_data = Rfid.objects.order_by('id')
     depts_data = Dept_names.objects.order_by("dept_name")
-    page_indexes = []
-    if(len(rfid_data) <= page_length):
-        page_indexes.append(1)
-    else:
-        for i in range(1,int(len(rfid_data)/page_length)+2):
-            page_indexes.append(i)
+    page_indexes = range(1,to_page_length(len(rfid),page_length))
+    test = to_page_length(len(rfid),page_length)
     rfid_data = rfid_data[(page_index-1)*page_length:(page_index*page_length)]
     type_data = It_types.objects.all()
     return render_to_response("rfid/rfid.html",locals())
+
+def to_page_length(data_len,page_len):     #计算当前数据数据量能分多少页
+    page_size = int(data_len/page_len)
+    if (data_len%page_len) == 0:
+        page_size += 1
+    return page_size
