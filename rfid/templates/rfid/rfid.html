@@ -83,12 +83,13 @@
 		<form id="page_form" action="{% url 'rfid' %}" method="get">
 		<ul class="pagination">
 			<li><a href="#">&laquo;</a></li>
-			{% for page in page_size %}
-				<li><a id="{{page}}" class="page_a">{{page}}</a></li>
+			{% for page in page_indexes %}
+				<li><a id="{{page}}" name="page_index" {% if page_index = page%} class="checked" {%endif%}>{{page}}</a></li>
 			{% endfor %}
 			<li><a href="#">&raquo;</a></li>
 		</ul>
 		</form>
+		<p>{{test}}</p>
     </div>
 
 

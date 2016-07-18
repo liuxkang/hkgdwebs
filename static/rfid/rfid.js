@@ -6,7 +6,7 @@ var sn_value;
 var user_value;
 var dept_value;
 var time_value;
-
+var page;			//记录当前页数
 function initAll()
 {
 	$('button[value="edit_button"]').click(edit_mode);				//设置“修改”按钮的点击事件
@@ -16,7 +16,7 @@ function initAll()
 	$('button[value="edit_button"]').addClass("show_mode");
 	$('button[value="ok_button"]').addClass("hide_mode").click(Check_2_Submit);
 	$('button[value="no_button"]').addClass("hide_mode");
-	$('.page_a').click(submit);
+	$('a[name="page_index"').click(change_page);
 }	
 
 
@@ -84,10 +84,10 @@ function watch_mode()				//查看模式
 	return true;
 }
 
-function submit()
+function change_page()
 {
-	var page = this.id;
-	$('#page_form').append('<input type="hidden" name="page" value="'+page+'" />');
+	page = this.id;
+	$('#page_form').append('<input type="hidden" name="page_index" value="'+page+'" />');
 	$('#page_form').submit();
 }
 

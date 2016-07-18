@@ -14,3 +14,8 @@ input.invalid{
 	background-color:#FF9;
 	border:2px red inset;
 }
+
+a.checked
+{
+	font-size:20px;
+}
