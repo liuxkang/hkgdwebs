@@ -57,23 +57,12 @@ def ipdb(request):
     
     ip_data = ip_data.order_by("id")
     depts_data = Dept_names.objects.order_by("dept_name")
-<<<<<<< HEAD
-    page_size = range(1,to_page_length(len(ip_data),page_length))
-=======
     page_indexes = range(1,to_page_length(len(ip_data),page_length))
->>>>>>> home
     ip_data = ip_data[(page_index-1)*page_length:(page_index*page_length)]
     return render_to_response("ipdb/ipdb.html",locals())
     
 def to_page_length(data_len,page_len):     #计算当前数据数据量能分多少页
-<<<<<<< HEAD
-    page_size = int(data_len/page_len)+1
-    if (data_len%page_len) != 0:
-        page_size += 1
-    return page_size
-=======
     page_size = int(data_len/page_len)+2
     if (data_len%page_len) == 0:
         page_size -= 1
     return page_size
->>>>>>> home
