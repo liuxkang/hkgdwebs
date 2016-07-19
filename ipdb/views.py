@@ -57,7 +57,7 @@ def ipdb(request):
     
     ip_data = ip_data.order_by("id")
     depts_data = Dept_names.objects.order_by("dept_name")
-    page_indexes = range(1,to_page_length(len(ip_data_data),page_length))
+    page_indexes = range(1,to_page_length(len(ip_data),page_length))
     ip_data = ip_data[(page_index-1)*page_length:(page_index*page_length)]
     return render_to_response("ipdb/ipdb.html",locals())
     
