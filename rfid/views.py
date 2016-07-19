@@ -34,7 +34,13 @@ def rfid(request):
     return render_to_response("rfid/rfid.html",locals())
 
 def to_page_length(data_len,page_len):     #计算当前数据数据量能分多少页
+<<<<<<< HEAD
     page_size = int(data_len/page_len)+1
     if (data_len%page_len) != 0:
         page_size += 1
+=======
+    page_size = int(data_len/page_len)+2
+    if (data_len%page_len) == 0:
+        page_size -= 1
+>>>>>>> home
     return page_size

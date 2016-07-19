@@ -101,7 +101,7 @@
 			{% endfor %}
 			<ul class="pagination">
 				<li><a href="#">&laquo;</a></li>
-				{% for page in page_size %}
+				{% for page in page_indexes %}
 					<li><a id="a_{{page}}" {% if page_index == page %} class="checked" {% endif %}>{{page}}</a></li>
 				{% endfor %}
 				<li><a href="#">&raquo;</a></li>
