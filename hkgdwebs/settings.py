@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'ipdb.apps.IpdbConfig',
     'web_nav.apps.WebNavConfig',
     'rfid.apps.RfidConfig',
+    'common.apps.CommonConfig',
     'bootstrap3',
     #'mod_wsgi',
 ]
