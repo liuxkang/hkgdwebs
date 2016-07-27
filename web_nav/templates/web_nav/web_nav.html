@@ -9,15 +9,13 @@
 	{% load staticfiles %}
 	<script src="{% static 'web_nav/web_nav.js' %}"  type="text/javascript"></script>
 	<script src="{% static 'web_nav/jquery-2.2.4.js' %}"></script>
-    {% load bootstrap3 %}
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
-    {% bootstrap_messages %}
+	<link rel="stylesheet" type="text/css" href="{% static 'web_nav/web_nav.css' %}"> 
+	<link rel="stylesheet" type="text/css" href="{% static 'web_nav/bootstrap.min.css' %}">
   </head>
 
   <body>
     <div class="container">
-		<nav class="navbar navbar-default" role="navigation">
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="#">河口供电</a>
 			</div>
@@ -33,7 +31,6 @@
 		<div class="row">
 			<div class="col-md-12">
 				<table class="table table-striped table-bordered table-hover datatable">
-					<caption>网页导航</caption>
 					<thead>
 						<tr>
 							<th>系统名称</th>
