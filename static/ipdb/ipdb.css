@@ -21,3 +21,7 @@ a.checked
 	width:200px;
 	float:left;
 }
+
+body{
+	padding-top:70px;
+}

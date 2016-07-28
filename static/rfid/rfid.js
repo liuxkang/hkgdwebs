@@ -11,11 +11,7 @@ function initAll()
 {
 	$('button[value="edit_button"]').click(edit_mode);				//设置“修改”按钮的点击事件
 	$('button[value="no_button"]').click(watch_mode);				//设置“取消”按钮的点击事件
-	$('input').addClass("hide_mode");
-	$('select').addClass("hide_mode");
-	$('button[value="edit_button"]').addClass("show_mode");
-	$('button[value="ok_button"]').addClass("hide_mode").click(Check_2_Submit);
-	$('button[value="no_button"]').addClass("hide_mode");
+	$('button[value="ok_button"]').click(Check_2_Submit);
 	$('a[name="page_index"').click(change_page);
 }	
 
