@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'web_nav.apps.WebNavConfig',
     'rfid.apps.RfidConfig',
     'common.apps.CommonConfig',
+    'news_report.apps.NewsReportConfig',
     'bootstrap3',
     #'mod_wsgi',
 ]

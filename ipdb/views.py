@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
 from .models import Ipdb,Dept_names
-from django.template import loader
+#from django.template import loader
 from django.views.decorators.csrf import csrf_protect
 from ipdb.models import Ipdb
 # Create your views here。

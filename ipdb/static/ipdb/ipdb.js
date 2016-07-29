@@ -45,9 +45,9 @@ function watch_mode()				//查看模式
 	$('div[id^="div"]').removeClass("hide_mode").addClass("show_mode");
 	$('select[id^="dept"]').removeClass("show_mode").addClass("hide_mode");
 	
-	$('input[id=mac_"'+ip_value+'"]').val(mac_value);
+	$('input[id="mac_'+ip_value+'"]').val(mac_value);
 	$('select[id="dept_'+ip_value+'"]').val(dept_value);
-	$('input[id=noted_"'+ip_value+'"]').val(noted_value);
+	$('input[id="noted_'+ip_value+'"]').val(noted_value);
 	return true;
 }
 

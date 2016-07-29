@@ -12,7 +12,7 @@ function initAll()
 	$('button[value="edit_button"]').click(edit_mode);				//设置“修改”按钮的点击事件
 	$('button[value="no_button"]').click(watch_mode);				//设置“取消”按钮的点击事件
 	$('button[value="ok_button"]').click(Check_2_Submit);
-	$('a[name="page_index"').click(change_page);
+	$('a[name="page_index"]').click(change_page);
 }	
 
 
