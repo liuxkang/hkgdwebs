@@ -18,10 +18,14 @@ from django.contrib import admin
 import ipdb.views
 import web_nav.views
 import rfid.views
+import news_report.views
+import common.views
 urlpatterns = [
     url(r'^$',web_nav.views.web_nav,name="index"),
     url(r'^admin/',admin.site.urls),
     url(r'^ipdb/',ipdb.views.ipdb,name="ipdb"),
     url(r'^rfid/',rfid.views.rfid,name="rfid"),
+    url(r'news_report/',news_report.views.news_report,name="news_report"),
+    url(r'user_signin/',common.views.user_signin,name="user_signin"),
     url(r'^test/',web_nav.views.test,name="test"),
 ]
