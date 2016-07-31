@@ -1,0 +1,27 @@
+input.watch_mode{
+	height:30px;
+}
+
+.show_mode{
+	display:inline;
+}
+
+.hide_mode{
+	display:none;
+}
+
+a.checked
+{
+	font-size:20px;
+}
+
+#check_area > li
+{
+	list-style:none;
+	width:200px;
+	float:left;
+}
+
+body{
+	padding-top:90px;
+}
